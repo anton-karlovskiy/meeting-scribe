@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from openai import OpenAI
 
 if TYPE_CHECKING:
-    from transformers import AutoModelForCausalLM, AutoTokenizer
+    from transformers import AutoModelForCausalLM, AutoTokenizer  # type: ignore[import]
 
 SYSTEM_PROMPT = (
     "You are an assistant that produces minutes of meetings from transcripts, "
@@ -38,8 +38,8 @@ def generate_with_gpt(transcription: str, model: str = "gpt-4.1-mini") -> str:
 def _load_llama(model_id: str = "meta-llama/Meta-Llama-3.1-8B-Instruct") -> tuple[AutoModelForCausalLM, AutoTokenizer]:
     global _llama_model, _llama_tokenizer
     if _llama_model is None:
-        import torch
-        from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+        import torch  # type: ignore[import]
+        from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig  # type: ignore[import]
 
         quant_config = BitsAndBytesConfig(
             load_in_4bit=True,
@@ -61,7 +61,7 @@ def generate_with_llama(
     transcription: str,
     model_id: str = "meta-llama/Meta-Llama-3.1-8B-Instruct",
 ) -> str:
-    import torch
+    import torch  # type: ignore[import]
 
     model, tokenizer = _load_llama(model_id)
     messages = [
