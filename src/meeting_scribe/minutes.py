@@ -1,6 +1,11 @@
-from typing import Any
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
 
 from openai import OpenAI
+
+if TYPE_CHECKING:
+    from transformers import AutoModelForCausalLM, AutoTokenizer
 
 SYSTEM_PROMPT = (
     "You are an assistant that produces minutes of meetings from transcripts, "
@@ -14,8 +19,8 @@ USER_PROMPT = (
     "takeaways; and action items with owners.\n{transcription}"
 )
 
-_llama_model = None
-_llama_tokenizer = None
+_llama_model: AutoModelForCausalLM | None = None
+_llama_tokenizer: AutoTokenizer | None = None
 
 
 def generate_with_gpt(transcription: str, model: str = "gpt-4.1-mini") -> str:
@@ -30,7 +35,7 @@ def generate_with_gpt(transcription: str, model: str = "gpt-4.1-mini") -> str:
     return response.choices[0].message.content or ""
 
 
-def _load_llama(model_id: str = "meta-llama/Meta-Llama-3.1-8B-Instruct") -> tuple[Any, Any]:
+def _load_llama(model_id: str = "meta-llama/Meta-Llama-3.1-8B-Instruct") -> tuple[AutoModelForCausalLM, AutoTokenizer]:
     global _llama_model, _llama_tokenizer
     if _llama_model is None:
         import torch
