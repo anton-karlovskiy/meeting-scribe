@@ -1,3 +1,5 @@
+from typing import Any
+
 from openai import OpenAI
 
 SYSTEM_PROMPT = (
@@ -25,10 +27,10 @@ def generate_with_gpt(transcription: str, model: str = "gpt-4.1-mini") -> str:
             {"role": "user", "content": USER_PROMPT.format(transcription=transcription)},
         ],
     )
-    return response.choices[0].message.content
+    return response.choices[0].message.content or ""
 
 
-def _load_llama(model_id: str = "meta-llama/Meta-Llama-3.1-8B-Instruct"):
+def _load_llama(model_id: str = "meta-llama/Meta-Llama-3.1-8B-Instruct") -> tuple[Any, Any]:
     global _llama_model, _llama_tokenizer
     if _llama_model is None:
         import torch

@@ -14,7 +14,7 @@ _MODELS = {
 }
 
 
-def process(audio_file: str | None, model_label: str, progress=gr.Progress()) -> tuple[str, str]:
+def process(audio_file: str | None, model_label: str, progress: gr.Progress = gr.Progress()) -> tuple[str, str]:
     if audio_file is None:
         return "Please upload an audio file.", ""
 
