@@ -2,8 +2,8 @@
 
 Transcribes meeting audio and generates structured minutes with action items. Uses OpenAI Whisper for transcription and your choice of model for the minutes:
 
-- **GPT-4.1 Mini** (OpenAI, closed-source) — fast, no GPU required
-- **Llama 3.1 8B** (Meta, open-source) — runs locally, requires a CUDA GPU
+- **GPT-4.1 Mini** (OpenAI, closed-source): fast, no GPU required
+- **Llama 3.1 8B** (Meta, open-source): runs locally, requires a CUDA GPU
 
 ## Setup
 
@@ -34,7 +34,7 @@ HF_TOKEN=hf_...             # required only when using the Llama model
 
 To use Llama 3.1 8B you also need to accept the license on [HuggingFace](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct).
 
-> **Note:** You do not need to download the model manually. On the first run with Llama selected, the weights (~16 GB) are downloaded automatically to your HuggingFace cache (`~/.cache/huggingface/`). Subsequent runs use the cached copy. A CUDA-capable NVIDIA GPU is required.
+> The model weights (~16 GB) are downloaded automatically on the first run to your HuggingFace cache (`~/.cache/huggingface/`). Subsequent runs use the cached copy. A CUDA-capable NVIDIA GPU is required.
 
 **3. Run**
 
